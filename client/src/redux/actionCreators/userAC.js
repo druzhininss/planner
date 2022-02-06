@@ -7,3 +7,9 @@ export function userRegistrationAC(payload) {
   };
 }
 
+export function logoutAC() {
+  return {
+    type: userAT.LOGOUT,
+  };
+}
+

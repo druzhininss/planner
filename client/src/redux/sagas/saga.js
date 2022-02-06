@@ -43,5 +43,5 @@ function* logout(action) {
 
 export function* myWatcher() {
   yield takeEvery("CREATE_USER", createNewUser);
-  yield takeEvery("LOGOUT_USER", logout);
+  yield takeEvery("LOGOUT", logout);
 }
