@@ -1,0 +1,14 @@
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  border: 1px solid gray;
+  padding: 0.5rem;
+  margin-left: 0px;
+  margin-right: 0px;
+
+}
+
+.auth-span {
+  padding-right: 5px;  
+}
