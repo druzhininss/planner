@@ -4,8 +4,9 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 const SessionFileStore = require('session-file-store')(expressSession);
-const bcrypt = require('bcrypt');
-const indexRouter = require('./routes/index.router'); // Index router req
+const cors = require('cors');
+const registrationRouter = require('./routes/registration.router');
+const logoutRouter = require('./routes/logout.router');
 
 const PORT = process.env.PORT ?? 5000;
 
@@ -23,14 +24,22 @@ const sessionConfig = {
   },
 };
 
+const corsOptions = {
+  origin: ['http://localhost:3000'], // TODO: access on build ?
+  credentials: true,
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
 app.use(morgan('dev'));
 app.use(expressSession(sessionConfig));
 app.use(cookieParser());
+app.use(cors(corsOptions)); // cors init
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true })); // for req.body
 app.use(express.json());
 
-app.use('/', indexRouter); // Index router setup
+app.use('/registration', registrationRouter);
+app.use('/logout', logoutRouter);
 
 app.listen(PORT, () => {
   console.log(`*** Server started on port ${PORT} ***`);

@@ -1,15 +1,15 @@
 function passChecker(req, res, next) {
   const {
-    password,
+    password1,
     password2,
   } = req.body;
 
-  if (password !== password2) {
-    return res.json({ registration: false, message: 'Введенные пароли не совпадают' });
+  if (password1 !== password2) {
+    return res.json({ login: false, message: 'Введенные пароли не совпадают' });
   }
 
-  if (password.length < 8) {
-    return res.json({ registration: false, message: 'Длинна пароля должна быть более 8 символов' });
+  if (password1.length < 8) {
+    return res.json({ login: false, message: 'Длинна пароля должна быть более 8 символов' });
   }
   next();
 }
