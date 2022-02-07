@@ -6,6 +6,7 @@ const expressSession = require('express-session');
 const SessionFileStore = require('session-file-store')(expressSession);
 const cors = require('cors');
 const registrationRouter = require('./routes/registration.router');
+const loginRouter = require('./routes/login.router');
 const logoutRouter = require('./routes/logout.router');
 
 const PORT = process.env.PORT ?? 5000;
@@ -39,6 +40,7 @@ app.use(express.urlencoded({ extended: true })); // for req.body
 app.use(express.json());
 
 app.use('/registration', registrationRouter);
+app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 
 app.listen(PORT, () => {

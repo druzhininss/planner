@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import s from './Registration.module.css';
 import { useDispatch, useSelector } from 'react-redux'
-import { userRegistrationAC } from '../../redux/actionCreators/userAC';
+import { clearMessageAC, userRegistrationAC } from '../../redux/actionCreators/userAC';
+import { Redirect } from 'react-router-dom';
 
 function Registration(props) {
   const dispatch = useDispatch();
@@ -11,6 +12,10 @@ function Registration(props) {
   const email = useRef();
   const password1 = useRef();
   const password2 = useRef();
+
+  useEffect(() => {
+    dispatch(clearMessageAC());
+  }, [dispatch]);
 
   const getUserData = () => {
     return {
@@ -35,7 +40,15 @@ function Registration(props) {
       <label>Повторите пароль:</label>
       <input className={s['text-input']} ref={password2} type="password" placeholder="Повторите пароль" />
       <input className={s['submit-button']} type="submit" value="Отправить" />
-      {}
+
+      {
+        user?.message
+          ?
+          <p style={{ fontSize: '0.7rem', color: 'red' }}>{user.message}</p>
+          :
+          user?.login && <Redirect to='/' />
+      }
+
     </form>
   );
 }
