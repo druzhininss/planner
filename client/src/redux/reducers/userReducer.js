@@ -69,6 +69,17 @@ export const userReducer = (state = initialState, action) => {
       }
     }
 
+    case userAT.CHECK_AUTH_RESULT: {
+      return {
+        ...state,
+        user: {
+          login: action.payload.login,
+          message: '',
+          userId: action.payload.userId,
+        }
+      }
+    }
+
     default: {
       return state;
     }

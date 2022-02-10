@@ -8,6 +8,8 @@ const cors = require('cors');
 const registrationRouter = require('./routes/registration.router');
 const loginRouter = require('./routes/login.router');
 const logoutRouter = require('./routes/logout.router');
+const plansRouter = require('./routes/plans.router');
+const apiRouter = require('./routes/api.router');
 
 const PORT = process.env.PORT ?? 5000;
 
@@ -42,6 +44,8 @@ app.use(express.json());
 app.use('/registration', registrationRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
+app.use('/plans', plansRouter);
+app.use('/api', apiRouter);
 
 app.listen(PORT, () => {
   console.log(`*** Server started on port ${PORT} ***`);

@@ -1,27 +1,33 @@
 import { userAT } from '../actionTypes/userAT';
 
-export function userRegistrationAC (payload) {
+export function userRegistrationAC(payload) {
   return {
     type: userAT.CREATE_USER,
-    payload
+    payload,
   };
-}
+};
 
-export function userLoginAC (payload) {
+export function userLoginAC(payload) {
   return {
     type: userAT.LOGIN,
-    payload
-  }
-}
+    payload,
+  };
+};
 
-export function logoutAC () {
+export function logoutAC() {
   return {
     type: userAT.LOGOUT,
   };
-}
+};
 
-export function clearMessageAC () {
+export function clearMessageAC() {
   return {
     type: userAT.CLEAR_STATE,
-  }
-}
+  };
+};
+
+export function checkAuth() {
+  return {
+    type: userAT.CHECK_AUTH,
+  };
+};
