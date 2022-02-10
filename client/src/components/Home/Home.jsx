@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import PlansList from '../PlansList/PlansList';
-import s from './Home.module.css'
 import { getUserPlansAC } from '../../redux/actionCreators/plansAC';
+import s from './Home.module.css'
+import { useHistory } from 'react-router-dom';
 
 
 function Home(props) {
   const { user } = useSelector(state => state.userReducer);
   const { plans } = useSelector(state => state.plansReducer);
   const dispatch = useDispatch();
+  const history = useHistory();
 
-  const [buttonValue, changeValue] = useState('Показать планы');
+  const [buttonValue, changeValue] = useState('Показать мои планы 👀');
   const [plansVisibility, setVisibility] = useState(false);
 
   useEffect(() => {
@@ -21,22 +23,24 @@ function Home(props) {
 
   return (
     <div>
-      <div>Welcome text at Home</div>
       {
         user?.login
           ?
           <input className={s['plans-button']} type="button" value={buttonValue}
             onClick={() => {
               if (plansVisibility) {
-                changeValue('Показать планы');
+                changeValue('Показать мои планы 👀');
                 setVisibility(false);
               } else {
-                changeValue('Спрятать мои планы');
+                changeValue('Скрыть мои планы 🙈');
                 setVisibility(true);
               }
             }} />
           :
-          <p>Здесь вы могли бы увидеть ваши планы, но вы не залогинились 🤷</p>
+          <input className={s['plans-button-disabled']} type="button"
+            value="Здесь вы могли бы увидеть ваши планы, но вы не залогинились 🤷"
+            onClick={() => history.push('/login')} />
+
       }
       <div>
         {plansVisibility ? <PlansList plans={plans} /> : <></>}

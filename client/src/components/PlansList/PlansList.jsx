@@ -5,6 +5,7 @@ import Plan from '../Plan/Plan';
 function PlansList({ plans }) {
   return (
     <div>
+      <input type="button" value="Добавить планы" onClick={() => {}} />
       {plans && plans.map(plan => <Plan key={uuidv4()} plan={plan} />)}
     </div>
   );
