@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import PlansList from '../PlansList/PlansList';
 import { getUserPlansAC } from '../../redux/actionCreators/plansAC';
-import s from './Home.module.css'
 import { useHistory } from 'react-router-dom';
+import PlansList from '../PlansList/PlansList';
+import ModalAddPlans from '../ModalAddPlans/ModalAddPlans';
+import ModalEditPlans from '../ModalEditPlans/ModalEditPlans';
+import s from './Home.module.css'
 
 
 function Home(props) {
@@ -14,6 +16,8 @@ function Home(props) {
 
   const [buttonValue, changeValue] = useState('Показать мои планы 👀');
   const [plansVisibility, setVisibility] = useState(false);
+  const [addPlansModal, setPlansModal] = useState(false);
+  const [editPlansModal, setEditModal] = useState(false);
 
   useEffect(() => {
     if (user.userId) {
@@ -26,25 +30,47 @@ function Home(props) {
       {
         user?.login
           ?
-          <input className={s['plans-button']} type="button" value={buttonValue}
-            onClick={() => {
-              if (plansVisibility) {
-                changeValue('Показать мои планы 👀');
-                setVisibility(false);
-              } else {
-                changeValue('Скрыть мои планы 🙈');
-                setVisibility(true);
+          <>
+            <div className={s['buttons-container']}>
+              <input className={s['plans-button']} type="button" value={buttonValue}
+                onClick={() => {
+                  if (plansVisibility) {
+                    changeValue('Показать мои планы 👀');
+                    setVisibility(false);
+                  } else {
+                    changeValue('Скрыть мои планы 🙈');
+                    setVisibility(true);
+                  }
+                }} />
+              {
+                plansVisibility
+                &&
+                <input className={s['plans-update-button']} type="button" value="🔄"
+                  onClick={() => {
+                    dispatch(getUserPlansAC(user.userId));
+                  }} />
               }
-            }} />
+              <input className={s['plans-button']} type="button" value="Добавить планы"
+                onClick={() => {
+                  setPlansModal(!addPlansModal);
+                }} />
+            </div>
+
+            <div>
+              {addPlansModal && <ModalAddPlans isOpened={setPlansModal} />}
+              {editPlansModal && <ModalEditPlans setEditModal={setEditModal} planId={editPlansModal} />}
+            </div>
+          </>
           :
-          <input className={s['plans-button-disabled']} type="button"
-            value="Здесь вы могли бы увидеть ваши планы, но вы не залогинились 🤷"
-            onClick={() => history.push('/login')} />
+          <div className={s['buttons-container']}>
+            <input className={s['plans-button-disabled']} type="button"
+              value="Здесь вы могли бы увидеть ваши планы, но вы не залогинились 🤷"
+              onClick={() => history.push('/login')} />
+          </div>
 
       }
-      <div>
-        {plansVisibility ? <PlansList plans={plans} /> : <></>}
-      </div>
+
+      {plansVisibility && <PlansList plans={plans} setEditModal={setEditModal} />}
 
     </div>
   );

@@ -25,14 +25,18 @@ function Login(props) {
 
   return (
     <div>
+
       <form className={s['login-form']} onSubmit={(event) => {
         event.preventDefault();
         dispatch(userLoginAC(getUserData()));
       }}>
+
         <label>Адрес электронной почты:</label>
         <input className={s['text-input']} ref={email} type="email" placeholder="Введите адрес электронной почты" />
+
         <label>Пароль:</label>
         <input className={s['text-input']} ref={password} type="password" placeholder="Введите пароль" />
+
         <input className={s['submit-button']} type="submit" value="Отправить" />
 
         {
@@ -44,6 +48,7 @@ function Login(props) {
         }
 
       </form>
+
     </div>
   );
 }

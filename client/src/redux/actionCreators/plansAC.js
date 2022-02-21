@@ -12,3 +12,17 @@ export function getUserPlansAC(payload) {
 //     type: plansAT.HIDE_USER_PLANS,
 //   }
 // }
+
+export function sendUserPlansAC(payload) {
+  return {
+    type: plansAT.SEND_USER_PLANS,
+    payload
+  }
+}
+
+export function updateUserPlansAC(payload) {
+  return {
+    type: plansAT.UPDATE_USER_PLANS,
+    payload
+  }
+}
