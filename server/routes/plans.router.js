@@ -76,4 +76,17 @@ router
     }
   });
 
+router
+  .route('/deletePlan')
+  .delete(async (req, res) => {
+    try {
+      const { planId } = req.body;
+      await Plan.destroy({ where: { id: planId } });
+
+      res.status(201).json({});
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+  });
+
 module.exports = router;

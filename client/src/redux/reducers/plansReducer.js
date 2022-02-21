@@ -31,8 +31,9 @@ export const plansReducer = (state = initialState, action) => {
     case plansAT.PLANS_UPDATED: {
       const stateCopy = { ...state };
       const updatedPlans = stateCopy.plans.map((plan) => {
-        if (plan.id === action.payload.id) {
+        if (plan.id === action.payload.planId) {
           const updatedPlan = {
+            id: action.payload.planId,
             title: action.payload.title,
             description: action.payload.description,
             date: action.payload.date,
@@ -41,6 +42,7 @@ export const plansReducer = (state = initialState, action) => {
         }
         return plan;
       })
+
       return {
         ...state,
         plans: updatedPlans,

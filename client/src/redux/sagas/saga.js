@@ -129,6 +129,27 @@ function* updateUserPlans(action) {
   };
 }
 
+function* deleteUserPlan(action) {
+  try {
+    const deletePlanFetch = yield call(fetchData, {
+      url: `http://localhost:5000/plans/deletePlan`,
+      method: "DELETE",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        planId: action.payload,
+      }),
+    });
+
+    if (deletePlanFetch.message) {
+      yield put({ type: "PLAN_DELETE_ERROR", payload: deletePlanFetch.message });
+    } else {
+      yield put({ type: "PLAN_DELETED", payload: deletePlanFetch });
+    }
+  } catch (e) { 
+    yield put({ type: "DELETE_PLAN_FAILED", payload: "Plan is not deleted" });
+  };
+}
+
 function* checkAuth(action) {
   try {
     const checkAuthFetch = yield call(fetchData, {
@@ -148,4 +169,5 @@ export function* myWatcher() {
   yield takeEvery("GET_USER_PLANS", getUserPlans);
   yield takeEvery("CHECK_AUTH", checkAuth);
   yield takeEvery("UPDATE_USER_PLANS", updateUserPlans);
+  yield takeEvery("DELETE_USER_PLAN", deleteUserPlan);
 };

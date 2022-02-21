@@ -43,8 +43,6 @@ function Modal({ setEditModal, planId }) {
     }
   };
 
-
-
   return (
 
     <div className={s['modal']}>
@@ -60,17 +58,18 @@ function Modal({ setEditModal, planId }) {
             sendValidData();
           }}>
 
-          <label>Title:</label>
-          <input ref={title} className={s['text-input']} type="text" placeholder={planData.title} />
+          <label>Планирую:</label>
+          <input ref={title} className={s['text-input']} type="text" defaultValue={planData.title} placeholder={planData.title} />
 
-          <label>Description:</label>
-          <input ref={description} className={s['text-input']} type="text" placeholder={planData.description} />
+          <label>Описание:</label>
+          <input ref={description} className={s['text-input']} type="text" defaultValue={planData.description} placeholder={planData.description} />
 
-          <label>Prev date:</label>
+          <label>Предыдущая дата:</label>
           <input className={s['text-input']} type="text" placeholder={modifyDate(planData.date)} disabled />
 
-          <label>New date:</label>
+          <label>Новая дата:</label>
           <input ref={date} className={s['text-input']} type="date" />
+          
           <input className={s['submit-button']} type="submit" value="Изменить" />
 
           {

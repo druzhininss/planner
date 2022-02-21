@@ -1,22 +1,28 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { modifyDate, isDateFresh } from '../../helpers/date';
+import { deleteUserPlanAC } from '../../redux/actionCreators/plansAC';
 import s from './Plan.module.css'
 
 function Plan({ plan, setEditModal }) {
-  
+  const dispatch = useDispatch();
+
   return (
     <div className={s['plan']}>
-      <p>Title:</p>
+      <p>Планирую:</p>
       <p>{plan.title}</p>
 
-      <p>Description:</p>
+      <p>Описание:</p>
       <p>{plan.description}</p>
 
-      <p>Date:</p>
+      <p>Дата:</p>
       <p style={isDateFresh(plan.date)}>{modifyDate(plan.date)}</p>
+
+      <div className={s['buttons-container']}>
+      <input className={s['update-button']} type="button" value="Изменить" onClick={() => setEditModal(plan.id)} />
+      <input className={s['done-button']} type="button" value="Завершить" onClick={() => dispatch(deleteUserPlanAC(plan.id))} />
+      </div>
       
-      <input type="button" value="Edit" onClick={() => setEditModal(plan.id)} />
-      <input type="button" value="Done" />
     </div>
   );
 }

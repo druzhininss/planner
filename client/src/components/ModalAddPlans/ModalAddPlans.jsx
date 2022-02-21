@@ -26,6 +26,7 @@ function Modal({ isOpened }) {
     // 1. validate title and date
     // 2. close modal if ok, or show error
     // 3. allow enter in description field
+    // TODO: Обновить стейт и показать новый план на Home (PLANS_UPLOADED)
 
     const data = getPlanData();
     const { title, date } = data;
@@ -52,17 +53,18 @@ function Modal({ isOpened }) {
             event.preventDefault();
 
             sendValidData();
-            dispatch(getUserPlansAC(userId));
+            // dispatch(getUserPlansAC(userId));
           }}>
 
-          <label>Title:</label>
+          <label>Планирую:</label>
           <input ref={title} className={s['text-input']} type="text" />
 
-          <label>Description:</label>
+          <label>Описание:</label>
           <input ref={description} className={s['text-input']} type="text" />
 
-          <label>Date:</label>
+          <label>Дата:</label>
           <input ref={date} className={s['text-input']} type="date" />
+
           <input className={s['submit-button']} type="submit" value="Отправить" />
 
           {

@@ -26,3 +26,10 @@ export function updateUserPlansAC(payload) {
     payload
   }
 }
+
+export function deleteUserPlanAC(payload) {
+  return {
+    type: plansAT.DELETE_USER_PLAN,
+    payload
+  }
+}

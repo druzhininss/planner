@@ -70,7 +70,13 @@ function Home(props) {
 
       }
 
-      {plansVisibility && <PlansList plans={plans} setEditModal={setEditModal} />}
+      {
+        (plansVisibility && plans.length > 0)
+          ?
+          <PlansList plans={plans} setEditModal={setEditModal} />
+          :
+          plansVisibility && <p>Планов нет 🤷</p>
+      }
 
     </div>
   );
