@@ -5,7 +5,6 @@ const initialState = { plans: [], message: '', };
 
 export const plansReducer = (state = initialState, action) => {
   switch (action.type) {
-    // TODO: check all todos and make sort in reducer
     
     case plansAT.PLANS_UPLOADED: {
       const { plans } = action.payload;
@@ -20,6 +19,16 @@ export const plansReducer = (state = initialState, action) => {
       const plansCopy = [ ...state.plans ];
       const updatedPlans = plansCopy;
       updatedPlans.push(newPlan);
+
+      updatedPlans.sort(function (planA, planB) {
+        if (planA.date > planB.date) {
+          return 1;
+        }
+        if (planA.date < planB.date) {
+          return -1;
+        }
+        return 0;
+      });
 
       return {
         ...state,
@@ -37,6 +46,7 @@ export const plansReducer = (state = initialState, action) => {
 
     case plansAT.PLANS_UPDATED: {
       const stateCopy = { ...state };
+
       const updatedPlans = stateCopy.plans.map((plan) => {
         if (plan.id === action.payload.planId) {
           const updatedPlan = {
@@ -50,6 +60,16 @@ export const plansReducer = (state = initialState, action) => {
         return plan;
       })
 
+      updatedPlans.sort(function (planA, planB) {
+        if (planA.date > planB.date) {
+          return 1;
+        }
+        if (planA.date < planB.date) {
+          return -1;
+        }
+        return 0;
+      });
+
       return {
         ...state,
         plans: updatedPlans,
@@ -59,7 +79,19 @@ export const plansReducer = (state = initialState, action) => {
     case plansAT.PLAN_DELETED: {
       const plansCopy =  [ ...state.plans ];
       const { planId } = action.payload;
-      const updatedPlans = plansCopy.filter((plan) => plan.id !== planId)
+
+      const updatedPlans = plansCopy.filter((plan) => plan.id !== planId);
+
+      updatedPlans.sort(function (planA, planB) {
+        if (planA.date > planB.date) {
+          return 1;
+        }
+        if (planA.date < planB.date) {
+          return -1;
+        }
+        return 0;
+      });
+
       return {
         ...state,
         plans: updatedPlans,
