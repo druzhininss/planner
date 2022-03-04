@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {  updateUserPlansAC } from '../../redux/actionCreators/plansAC';
 import s from './ModalEditPlans.module.css';
-import { modifyDate } from '../../helpers/date';
 
 function Modal({ setEditModal, planId }) {
   const dispatch = useDispatch();
@@ -64,12 +63,9 @@ function Modal({ setEditModal, planId }) {
           <label>Описание:</label>
           <input ref={description} className={s['text-input']} type="text" defaultValue={planData.description} placeholder={planData.description} />
 
-          <label>Предыдущая дата:</label>
-          <input className={s['text-input']} type="text" placeholder={modifyDate(planData.date)} disabled />
+          <label>Дата:</label>
+          <input ref={date} className={s['text-input']} type="date" defaultValue={planData.date} />
 
-          <label>Новая дата:</label>
-          <input ref={date} className={s['text-input']} type="date" />
-          
           <input className={s['submit-button']} type="submit" value="Изменить" />
 
           {

@@ -35,13 +35,14 @@ router
       if (!date || !title) {
         res.status(400).json({ message: 'Заполните поля Title и Дата' });
       } else {
-        await Plan.create({
+        const newPlan = await Plan.create({
           userId,
           title,
           description: description || '--',
           date,
         });
-        res.status(201).json({});
+
+        res.status(201).json({ newPlan });
       }
     } catch (err) {
       res.status(400).json({ message: err.message });

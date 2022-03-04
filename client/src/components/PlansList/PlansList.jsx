@@ -6,7 +6,7 @@ import s from './PlanList.module.css'
 function PlansList({ plans, setEditModal }) {
   return (
     <div className={s['plans-container']}>
-      {plans && plans.map(plan => <Plan setEditModal={setEditModal} key={uuidv4()} plan={plan} />)}
+      {plans && plans.map(plan => <Plan plan={plan} setEditModal={setEditModal} key={uuidv4()} />)}
     </div>
   );
 }

@@ -12,7 +12,7 @@ function Nav(props) {
   return (
     <nav className={s['nav-container']}>
       <Link to='/' className="">Home</Link>
-      <Link to='/' className="">Center</Link>
+      {/* <Link to='/' className="">Center</Link> */}
       <div className={s['auth-block']}>
         {
           user?.login

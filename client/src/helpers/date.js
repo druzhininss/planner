@@ -1,11 +1,16 @@
 export const modifyDate = (date) => {
-  const modifiedDate = date.split('-').reverse().join(' / ');
+  const modifiedDate = (new Date(date)).toLocaleDateString();
   return modifiedDate;
 };
 
 export const isDateFresh = (date) => {
-  const today = (new Date()).toLocaleDateString('ru-RU');
-  const comparisonDate = (new Date(date)).toLocaleDateString('ru-RU');
+  const newDate = new Date()
+    .toLocaleDateString(undefined, { dateStyle: 'short' })
+    .split('.')
+    .reverse()
+    .join('-');
+  const today = Date.parse(newDate);
+  const comparisonDate = Date.parse(date);
 
   if (today > comparisonDate) {
     return { color: 'red' }

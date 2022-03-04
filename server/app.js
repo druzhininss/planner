@@ -28,7 +28,7 @@ const sessionConfig = {
 };
 
 const corsOptions = {
-  origin: ['http://localhost:3000'], // TODO: access on build ?
+  origin: ['http://localhost:3000'],
   credentials: true,
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
@@ -38,7 +38,7 @@ app.use(expressSession(sessionConfig));
 app.use(cookieParser());
 app.use(cors(corsOptions)); // cors init
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({ extended: true })); // for req.body
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use('/registration', registrationRouter);
@@ -48,5 +48,6 @@ app.use('/plans', plansRouter);
 app.use('/api', apiRouter);
 
 app.listen(PORT, () => {
+  // eslint-disable-next-line no-console
   console.log(`*** Server started on port ${PORT} ***`);
 });

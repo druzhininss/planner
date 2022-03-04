@@ -5,8 +5,7 @@ import { useHistory } from 'react-router-dom';
 import PlansList from '../PlansList/PlansList';
 import ModalAddPlans from '../ModalAddPlans/ModalAddPlans';
 import ModalEditPlans from '../ModalEditPlans/ModalEditPlans';
-import s from './Home.module.css'
-
+import s from './Home.module.css';
 
 function Home(props) {
   const { user } = useSelector(state => state.userReducer);
@@ -75,7 +74,7 @@ function Home(props) {
           ?
           <PlansList plans={plans} setEditModal={setEditModal} />
           :
-          plansVisibility && <p>Планов нет 🤷</p>
+          (plansVisibility && user?.login) && <p>Планов нет 🤷</p>
       }
 
     </div>

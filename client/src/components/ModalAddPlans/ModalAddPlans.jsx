@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserPlansAC, sendUserPlansAC } from '../../redux/actionCreators/plansAC';
+import { sendUserPlansAC } from '../../redux/actionCreators/plansAC';
 import s from './ModalAddPlans.module.css';
 
 function Modal({ isOpened }) {
@@ -23,10 +23,7 @@ function Modal({ isOpened }) {
   };
 
   const sendValidData = () => {
-    // 1. validate title and date
-    // 2. close modal if ok, or show error
-    // 3. allow enter in description field
-    // TODO: Обновить стейт и показать новый план на Home (PLANS_UPLOADED)
+    // TODO: allow enter in description field
 
     const data = getPlanData();
     const { title, date } = data;
@@ -51,9 +48,7 @@ function Modal({ isOpened }) {
         <form className={s['add-plans-form']}
           onSubmit={(event) => {
             event.preventDefault();
-
             sendValidData();
-            // dispatch(getUserPlansAC(userId));
           }}>
 
           <label>Планирую:</label>

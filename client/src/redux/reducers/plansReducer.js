@@ -5,7 +5,8 @@ const initialState = { plans: [], message: '', };
 
 export const plansReducer = (state = initialState, action) => {
   switch (action.type) {
-
+    // TODO: check all todos and make sort in reducer
+    
     case plansAT.PLANS_UPLOADED: {
       const { plans } = action.payload;
       return {
@@ -15,8 +16,14 @@ export const plansReducer = (state = initialState, action) => {
     }
 
     case plansAT.PLANS_SEND: {
+      const newPlan = action.payload;
+      const plansCopy = [ ...state.plans ];
+      const updatedPlans = plansCopy;
+      updatedPlans.push(newPlan);
+
       return {
         ...state,
+        plans: updatedPlans,
         message: '',
       }
     }
@@ -43,6 +50,16 @@ export const plansReducer = (state = initialState, action) => {
         return plan;
       })
 
+      return {
+        ...state,
+        plans: updatedPlans,
+      }
+    }
+
+    case plansAT.PLAN_DELETED: {
+      const plansCopy =  [ ...state.plans ];
+      const { planId } = action.payload;
+      const updatedPlans = plansCopy.filter((plan) => plan.id !== planId)
       return {
         ...state,
         plans: updatedPlans,

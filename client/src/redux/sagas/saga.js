@@ -97,7 +97,7 @@ function* sendUserPlans(action) {
     if (newPlanFetch.message) {
       yield put({ type: "PLANS_SEND_ERROR", payload: newPlanFetch.message });
     } else {
-      yield put({ type: "PLANS_SEND", payload: newPlanFetch });
+      yield put({ type: "PLANS_SEND", payload: newPlanFetch.newPlan });
     }
   } catch (e) { 
     yield put({ type: "SEND_PLANS_FAILED", payload: "Plans are not send" });
@@ -143,7 +143,7 @@ function* deleteUserPlan(action) {
     if (deletePlanFetch.message) {
       yield put({ type: "PLAN_DELETE_ERROR", payload: deletePlanFetch.message });
     } else {
-      yield put({ type: "PLAN_DELETED", payload: deletePlanFetch });
+      yield put({ type: "PLAN_DELETED", payload: { planId: action.payload } });
     }
   } catch (e) { 
     yield put({ type: "DELETE_PLAN_FAILED", payload: "Plan is not deleted" });
