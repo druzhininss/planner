@@ -1,0 +1,6 @@
+.plans-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-top: 0.5rem;
+}
