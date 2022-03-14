@@ -27,10 +27,6 @@ function Modal({ setEditModal, planId }) {
   };
 
   const sendValidData = () => {
-    // 1. validate title and date
-    // 2. close modal if ok, or show error
-    // 3. allow enter in description field
-
     const data = getPlanData();
     const { title, date } = data;
     if (!title || !date) {

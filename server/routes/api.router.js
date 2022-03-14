@@ -6,9 +6,9 @@ router
     const { user } = req.session;
 
     if (user) {
-      res.status(201).json({ login: true, userId: user.id });
+      res.status(201).json({ login: true, userId: user.id, username: user.username });
     } else {
-      res.status(404).json({ login: false, userId: null });
+      res.status(404).json({ login: false, userId: null, username: user.username });
     }
   });
 

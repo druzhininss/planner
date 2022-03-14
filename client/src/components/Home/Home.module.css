@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 8px;
 }
 
 .plans-button {
@@ -33,15 +34,13 @@
   cursor: pointer;
 }
 
-.plans-update-button {
+.plans-sort-button {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
-  width: 5%;
   height: 3.5rem;
-  font-size: 1.8rem;
-  background-color: #235edd4b;
+  background-color: #235edd83;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -50,6 +49,6 @@
   cursor: pointer;
 }
 
-.plans-update-button:hover {
-  background-color: #235edd8a;
+.plans-sort-button:hover {
+  background-color: #235eddbd;
 }

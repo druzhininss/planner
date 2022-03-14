@@ -98,12 +98,37 @@ export const plansReducer = (state = initialState, action) => {
       }
     }
 
-    // case plansAT.HIDE_USER_PLANS: {
-    //   return {
-    //     ...state,
-    //     plans: [],
-    //   }
-    // }
+    case plansAT.SORT_PLANS: {
+      const plansCopy = [ ...state.plans ];
+      const sortType = action.payload; // true => from a to z, false => from z to a
+
+      if (sortType) {
+        plansCopy.sort(function (planA, planB) {
+          if (planA.date > planB.date) {
+            return 1;
+          }
+          if (planA.date < planB.date) {
+            return -1;
+          }
+          return 0;
+        });
+      } else {
+        plansCopy.sort(function(planA, planB) {
+          if (planA.date > planB.date) {
+            return -1;
+          }
+          if (planA.date < planB.date) {
+            return 1;
+          }
+          return 0
+        })
+      };
+
+      return {
+        ...state,
+        plans: plansCopy
+      }
+    }
 
     case userAT.LOGOUT: {
       return {

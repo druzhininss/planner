@@ -21,6 +21,7 @@ router
           res.status(200).json({
             login: true,
             userId: existingUser.id,
+            username: existingUser.username,
           });
         } else {
           res.status(404).json({ login: false, message: 'Такого пользователя не существует, либо данные введены не корректно.' });

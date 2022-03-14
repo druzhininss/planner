@@ -1,6 +1,6 @@
 import { userAT } from '../actionTypes/userAT';
 
-const initialState = { user: { login: false, message: '', userId: null, } };
+const initialState = { user: { login: false, message: '', userId: null, username: '' } };
 
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -11,6 +11,7 @@ export const userReducer = (state = initialState, action) => {
           login: action.payload.login,
           message: '',
           userId: action.payload.userId,
+          username: action.payload.username,
         }
       }
     }
@@ -33,6 +34,7 @@ export const userReducer = (state = initialState, action) => {
           login: action.payload.login,
           message: '',
           userId: action.payload.userId,
+          username: action.payload.username,
         }
       }
     }
@@ -55,6 +57,7 @@ export const userReducer = (state = initialState, action) => {
           login: false,
           message: '',
           userId: null,
+          username: '',
         }
       }
     }
@@ -76,6 +79,7 @@ export const userReducer = (state = initialState, action) => {
           login: action.payload.login,
           message: '',
           userId: action.payload.userId,
+          username: action.payload.username,
         }
       }
     }

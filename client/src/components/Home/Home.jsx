@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserPlansAC } from '../../redux/actionCreators/plansAC';
+import { getUserPlansAC, sortPlansAC } from '../../redux/actionCreators/plansAC';
 import { useHistory } from 'react-router-dom';
 import PlansList from '../PlansList/PlansList';
 import ModalAddPlans from '../ModalAddPlans/ModalAddPlans';
@@ -17,6 +17,7 @@ function Home(props) {
   const [plansVisibility, setVisibility] = useState(false);
   const [addPlansModal, setPlansModal] = useState(false);
   const [editPlansModal, setEditModal] = useState(false);
+  const [isSorted, setSort] = useState(true);
 
   useEffect(() => {
     if (user.userId) {
@@ -41,14 +42,17 @@ function Home(props) {
                     setVisibility(true);
                   }
                 }} />
+              
               {
                 plansVisibility
-                &&
-                <input className={s['plans-update-button']} type="button" value="🔄"
+                  &&
+                  <input className={s['plans-sort-button']} type="button" value={isSorted ? "Отображать сначала новые ⬆️" : "Отображать сначала просроченные ⬇️"}
                   onClick={() => {
-                    dispatch(getUserPlansAC(user.userId));
+                    setSort(!isSorted);
+                    dispatch(sortPlansAC(!isSorted));
                   }} />
               }
+
               <input className={s['plans-button']} type="button" value="Добавить планы"
                 onClick={() => {
                   setPlansModal(!addPlansModal);

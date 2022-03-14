@@ -23,8 +23,6 @@ function Modal({ isOpened }) {
   };
 
   const sendValidData = () => {
-    // TODO: allow enter in description field
-
     const data = getPlanData();
     const { title, date } = data;
     if (!title || !date) {
