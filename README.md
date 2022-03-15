@@ -16,7 +16,7 @@ Pet проект "Planner" это приложение для добавлени
 ![](/readme/reValid1.png)
 
 - Ещё одна ошибка валидации на форме регистрации (введённые пароли не совпадают):
-![](/readme/reValid1.png)
+![](/readme/reValid2.png)
 
 - Логин форма:
 ![](/readme/loginForm.png)
